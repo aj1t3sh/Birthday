@@ -1,82 +1,146 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import LoadingScreen from './components/LoadingScreen';
-import WelcomeScreen from './components/WelcomeScreen';
-import HeroSection from './components/HeroSection';
-import BlessingLetter from './components/BlessingLetter';
-import StarOfToday from './components/StarOfToday';
-import MakeAWish from './components/MakeAWish';
-import FinalSurprise from './components/FinalSurprise';
-import FloatingDecorations from './components/FloatingDecorations';
-import MusicPlayer from './components/MusicPlayer';
-import { playChime } from './utils/audioHelper';
+import StoryHeader from './components/StoryHeader';
+
+// 6 Celebratory Story Scenes
+import Page1Opening from './pages/Page1Opening';
+import Page2OrbitCollage from './pages/Page2OrbitCollage';
+import Page3DynamicNote from './pages/Page3DynamicNote';
+import Page4CakeCelebration from './pages/Page4CakeCelebration';
+import Page5GiftSurprise from './pages/Page5GiftSurprise';
+import Page6GrandFinale from './pages/Page6GrandFinale';
+
+import { toggleMelody, playChime } from './utils/audioHelper';
 
 export default function App() {
-  const [stage, setStage] = useState('loading'); // 'loading' | 'welcome' | 'experience'
-  const letterRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [direction, setDirection] = useState(1);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const totalPages = 6;
 
-  const handleLoadingComplete = () => {
-    setStage('welcome');
+  // Keyboard navigation for desktop testing
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight' && currentPage < totalPages) {
+        setDirection(1);
+        setCurrentPage((prev) => prev + 1);
+        playChime(659.25, 0.35, 'sine');
+      } else if (e.key === 'ArrowLeft' && currentPage > 1) {
+        setDirection(-1);
+        setCurrentPage((prev) => prev - 1);
+        playChime(587.33, 0.35, 'sine');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPage, totalPages]);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setDirection(1);
+      setCurrentPage((prev) => prev + 1);
+    }
   };
 
-  const handleOpenSurprise = () => {
-    setStage('experience');
-  };
-
-  const handleScrollToLetter = () => {
-    if (letterRef.current) {
-      letterRef.current.scrollIntoView({ behavior: 'smooth' });
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setDirection(-1);
+      setCurrentPage((prev) => prev - 1);
     }
   };
 
   const handleReplay = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-      setStage('welcome');
-    }, 400);
+    setDirection(-1);
+    setCurrentPage(1);
+  };
+
+  const handleToggleMusic = () => {
+    const active = toggleMelody();
+    setIsMusicPlaying(active);
+  };
+
+  // Full-screen page slide animation variants
+  const pageVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        x: { type: 'spring', stiffness: 280, damping: 30 },
+        opacity: { duration: 0.3 },
+      },
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      transition: {
+        x: { type: 'spring', stiffness: 280, damping: 30 },
+        opacity: { duration: 0.25 },
+      },
+    }),
   };
 
   return (
-    <div className="app-container">
-      {/* Ambient background particles & lighting */}
-      <FloatingDecorations />
+    <div
+      style={{
+        position: 'relative',
+        width: '100vw',
+        height: '100vh',
+        height: '100dvh',
+        overflow: 'hidden',
+        backgroundColor: 'var(--midnight-sky)',
+      }}
+    >
+      {/* Top Minimal Progress Header */}
+      <StoryHeader
+        currentPage={currentPage}
+        totalPages={totalPages}
+        isDark={true}
+        isMusicPlaying={isMusicPlaying}
+        onToggleMusic={handleToggleMusic}
+      />
 
-      {/* Floating Music Toggle Control */}
-      {stage === 'experience' && <MusicPlayer autoStart={true} />}
-
-      <AnimatePresence mode="wait">
-        {stage === 'loading' && (
-          <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
-        )}
-
-        {stage === 'welcome' && (
-          <WelcomeScreen key="welcome" onOpenSurprise={handleOpenSurprise} />
-        )}
-      </AnimatePresence>
-
-      {stage === 'experience' && (
-        <motion.main
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          style={{ width: '100%', position: 'relative', zIndex: 5 }}
-        >
-          {/* 1. Main Birthday Hero */}
-          <HeroSection onScrollToLetter={handleScrollToLetter} />
-
-          {/* 2. Personal Blessing Letter */}
-          <BlessingLetter letterRef={letterRef} />
-
-          {/* 3. Photo Memory Section: The Star of Today */}
-          <StarOfToday />
-
-          {/* 4. Interactive Make a Wish (Cake & Candle Ceremony) */}
-          <MakeAWish />
-
-          {/* 5. Final Surprise Screen */}
-          <FinalSurprise onReplay={handleReplay} />
-        </motion.main>
-      )}
+      {/* Main Full-Screen Viewport with Touch Drag / Swipe Handling */}
+      <main style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentPage}
+            custom={direction}
+            variants={pageVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.25}
+            onDragEnd={(e, { offset }) => {
+              if (offset.x < -60 && currentPage < totalPages) {
+                handleNext();
+              } else if (offset.x > 60 && currentPage > 1) {
+                handlePrev();
+              }
+            }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              touchAction: 'pan-y',
+            }}
+          >
+            {currentPage === 1 && <Page1Opening onNext={handleNext} />}
+            {currentPage === 2 && <Page2OrbitCollage onNext={handleNext} onPrev={handlePrev} />}
+            {currentPage === 3 && <Page3DynamicNote onNext={handleNext} onPrev={handlePrev} />}
+            {currentPage === 4 && <Page4CakeCelebration onNext={handleNext} onPrev={handlePrev} />}
+            {currentPage === 5 && <Page5GiftSurprise onNext={handleNext} onPrev={handlePrev} />}
+            {currentPage === 6 && <Page6GrandFinale onReplay={handleReplay} onPrev={handlePrev} />}
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </div>
   );
 }

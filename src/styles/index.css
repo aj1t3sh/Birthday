@@ -1,43 +1,40 @@
+/* ==========================================================================
+   🎬 "A Birthday Celebration in Seven Memories" — Celebratory CSS System
+   ========================================================================== */
+
 :root {
-  --bg-dark: #0d0716;
-  --bg-gradient: radial-gradient(circle at 50% 20%, #291136 0%, #150921 50%, #0a0412 100%);
-  
-  --gold-100: #fff6d6;
-  --gold-300: #fde088;
-  --gold-400: #f6c453;
-  --gold-500: #e5a823;
-  --gold-gradient: linear-gradient(135deg, #ffe082 0%, #f6c453 50%, #d49117 100%);
-  --gold-glow: 0 0 25px rgba(246, 196, 83, 0.45);
-  
-  --rose-100: #ffe4e9;
-  --rose-300: #ffa5b7;
-  --rose-400: #ff6584;
-  --rose-500: #e83e66;
-  --rose-gradient: linear-gradient(135deg, #ff8ba7 0%, #ff5277 50%, #c41c48 100%);
-  --rose-glow: 0 0 25px rgba(255, 101, 132, 0.4);
+  /* 🌌 Celebratory Cool Night Gradients */
+  --midnight-sky: #050817;
+  --midnight-indigo: #0d1238;
+  --royal-purple: #1e1445;
+  --violet-glow: #2d1858;
+  --blue-radiance: rgba(84, 130, 237, 0.3);
+  --purple-radiance: rgba(142, 117, 235, 0.35);
 
-  --purple-glow: 0 0 35px rgba(179, 102, 245, 0.35);
+  /* 🌸 Festive Highlights */
+  --pink-sparkle: #f29ab0;
+  --pink-gradient: linear-gradient(135deg, #fad0db 0%, #f29ab0 50%, #c45875 100%);
+  --gold-sparkle: #ffd166;
+  --gold-gradient: linear-gradient(135deg, #faeec7 0%, #ffd166 50%, #cc9622 100%);
 
-  --text-main: #fff8f0;
-  --text-muted: #e0d0e6;
-  --text-dim: #9d8ea4;
+  /* 📜 Dynamic Note Card */
+  --note-card-bg: rgba(18, 24, 60, 0.75);
+  --note-card-border: rgba(142, 117, 235, 0.35);
+  --note-card-shadow: 0 20px 50px rgba(3, 5, 15, 0.7);
+
+  /* Typography */
+  --text-pure: #ffffff;
+  --text-main: #f5f7fc;
+  --text-muted: #c2c9e5;
+  --text-dim: #7d88b2;
 
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-hand: 'Caveat', cursive;
-  --font-script: 'Great Vibes', cursive;
-  
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-bg-hover: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-gold: rgba(246, 196, 83, 0.28);
-  --glass-blur: blur(16px);
-  --glass-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(246, 196, 83, 0.08);
 
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 32px;
-  --radius-full: 9999px;
+  /* Safe Area */
+  --safe-top: env(safe-area-inset-top, 16px);
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
 }
 
 * {
@@ -47,139 +44,162 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: var(--font-sans);
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100vh;
+html, body {
   width: 100%;
-  background: var(--bg-gradient);
-  background-attachment: fixed;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: var(--midnight-sky);
+  font-family: var(--font-sans);
   color: var(--text-main);
-  line-height: 1.6;
-  font-size: 16px;
-  overflow-x: hidden;
-  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(13, 7, 22, 0.8);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(246, 196, 83, 0.3);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(246, 196, 83, 0.6);
-}
-
-/* Glassmorphism Card Utility */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--glass-shadow);
-}
-
-.glass-card-gold {
-  background: linear-gradient(135deg, rgba(255, 240, 200, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border-gold);
-  border-radius: var(--radius-md);
-  box-shadow: var(--glass-shadow);
-}
-
-/* Gradient Text */
-.text-gold-gradient {
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-.text-rose-gradient {
-  background: var(--rose-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-/* Shimmer Button */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--rose-gradient);
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1.05rem;
-  padding: 16px 32px;
-  border-radius: var(--radius-full);
-  border: none;
-  cursor: pointer;
-  box-shadow: var(--rose-glow), 0 6px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+#root {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
+}
+
+/* ==========================================================================
+   CELEBRATORY GRADIENT BACKGROUNDS
+   ========================================================================== */
+
+.bg-celebration-night {
+  background: radial-gradient(circle at 50% 30%, #1f1646 0%, #0c1130 55%, #050817 100%);
+  color: var(--text-main);
+}
+
+.bg-orbit-space {
+  background: radial-gradient(circle at 50% 50%, #261752 0%, #0e1236 50%, #050716 100%);
+  color: var(--text-main);
+}
+
+.bg-envelope-world {
+  background: radial-gradient(circle at 50% 35%, #23164a 0%, #0d1233 55%, #050817 100%);
+  color: var(--text-main);
+}
+
+.bg-cake-magic {
+  background: radial-gradient(circle at 50% 45%, #30185e 0%, #11143c 50%, #050716 100%);
+  color: var(--text-main);
+}
+
+.bg-gift-surprise {
+  background: radial-gradient(circle at 50% 40%, #291a50 0%, #0e1336 55%, #050717 100%);
+  color: var(--text-main);
+}
+
+.bg-grand-finale {
+  background: radial-gradient(circle at 50% 30%, #351c5e 0%, #131438 55%, #050716 100%);
+  color: var(--text-main);
+}
+
+/* Page Containers */
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.btn-primary:hover, .btn-primary:focus-visible {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 35px rgba(255, 101, 132, 0.6), 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.btn-primary:active {
-  transform: translateY(1px) scale(0.98);
-}
-
-.btn-gold {
-  background: var(--gold-gradient);
-  color: #2b1704;
-  box-shadow: var(--gold-glow), 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.btn-gold:hover, .btn-gold:focus-visible {
-  box-shadow: 0 0 35px rgba(246, 196, 83, 0.65), 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-/* App Container Layout */
-.app-container {
+.page-container {
+  flex: 1;
   width: 100%;
-  max-width: 100vw;
-  min-height: 100vh;
-  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.section-container {
-  width: 100%;
-  max-width: 720px;
-  padding: 48px 20px;
-  margin: 0 auto;
+  justifyContent: space-between;
+  padding: calc(var(--safe-top) + 50px) 18px calc(var(--safe-bottom) + 68px) 18px;
   position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   z-index: 10;
 }
 
 @media (max-width: 480px) {
-  .section-container {
-    padding: 36px 16px;
+  .page-container {
+    padding: calc(var(--safe-top) + 46px) 14px calc(var(--safe-bottom) + 60px) 14px;
+  }
+}
+
+/* ==========================================================================
+   BUTTONS — FESTIVE CELEBRATORY CONTROLS
+   ========================================================================== */
+
+.btn-celebrate-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--pink-gradient);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 30px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(242, 154, 176, 0.4), 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.btn-celebrate-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(242, 154, 176, 0.65), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.btn-celebrate-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-celebrate-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--gold-gradient);
+  color: #1a1202;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 14px 30px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 209, 102, 0.4), 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.btn-celebrate-gold:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 209, 102, 0.65), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.btn-celebrate-gold:active {
+  transform: scale(0.97);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

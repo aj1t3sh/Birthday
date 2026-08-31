@@ -1,144 +1,128 @@
-/* Animations for Birthday Blessings App */
+/* ==========================================================================
+   🎬 CIRCULAR ROTATING ORBIT & CELEBRATION KEYFRAMES 🎬
+   ========================================================================== */
 
-@keyframes floatGentle {
+/* 1. CONTINUOUS CIRCULAR ORBIT (360° Rotation around Center) */
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit-spin {
+  animation: orbitSpin 38s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* 2. MATCHING COUNTER-ROTATION (Keeps all photos visually upright!) */
+@keyframes orbitCounterSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-orbit-counter-spin {
+  animation: orbitCounterSpin 38s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* 3. Pause Animation Utility */
+.paused-orbit {
+  animation-play-state: paused !important;
+}
+
+/* 4. Ambient Radial Glow Breathing */
+@keyframes ambientGlowPulse {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.96);
   }
   50% {
-    transform: translateY(-10px) rotate(1deg);
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(1.08);
   }
 }
 
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-18px) rotate(-1.5deg);
-  }
+.animate-glow-breathe {
+  animation: ambientGlowPulse 8s ease-in-out infinite;
 }
 
-@keyframes floatParticle {
-  0% {
-    transform: translateY(100vh) scale(0.5) rotate(0deg);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.7;
-  }
-  80% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-10vh) scale(1.1) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(246, 196, 83, 0.4), 0 0 45px rgba(255, 101, 132, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(246, 196, 83, 0.75), 0 0 65px rgba(255, 101, 132, 0.45);
-  }
-}
-
-@keyframes pulseGoldHalo {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.9;
-  }
-}
-
-@keyframes shimmerSweep {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(0.7) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2) rotate(180deg);
-  }
-}
-
-/* Candle Flame Animations */
-@keyframes flameFlicker {
+/* 5. Realistic Candle Flame */
+@keyframes candleFlameFlicker {
   0%, 100% {
     transform: scale(1) rotate(-1deg);
-    border-radius: 50% 50% 35% 35%;
+    opacity: 0.98;
+    filter: drop-shadow(0 0 8px #ffd54f) drop-shadow(0 0 16px rgba(242, 154, 176, 0.5));
   }
   25% {
-    transform: scale(1.08, 0.95) rotate(2deg);
-    border-radius: 45% 55% 30% 40%;
+    transform: scale(1.05, 0.96) rotate(1.5deg);
+    opacity: 0.93;
   }
   50% {
-    transform: scale(0.95, 1.05) rotate(-2deg);
-    border-radius: 55% 45% 40% 30%;
+    transform: scale(0.96, 1.04) rotate(-1.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px #ffe082) drop-shadow(0 0 22px rgba(242, 154, 176, 0.65));
   }
   75% {
-    transform: scale(1.04, 1.02) rotate(1deg);
-    border-radius: 50% 50% 35% 35%;
+    transform: scale(1.03, 1.01) rotate(0.8deg);
+    opacity: 0.95;
   }
 }
 
-@keyframes flameGlow {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.25);
-  }
-}
-
-@keyframes smokeRise {
-  0% {
-    opacity: 0.8;
-    transform: translateY(0) scale(0.8);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-40px) scale(2.2);
-  }
-}
-
-/* Utility Animation Classes */
-.animate-float-gentle {
-  animation: floatGentle 5s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: floatSlow 7s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3.5s ease-in-out infinite;
-}
-
-.animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.animate-flame {
-  animation: flameFlicker 0.6s ease-in-out infinite alternate;
+.candle-flame {
+  animation: candleFlameFlicker 1.8s ease-in-out infinite;
   transform-origin: center bottom;
 }
 
-.animate-flame-glow {
-  animation: flameGlow 1.2s ease-in-out infinite alternate;
+/* 6. Floating Rising Balloons */
+@keyframes balloonRise {
+  0% {
+    transform: translateY(110vh) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1.05) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+.floating-balloon {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  animation: balloonRise 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Equalizer audio bars */
+@keyframes eq1 { 0%, 100% { height: 3px; } 50% { height: 11px; } }
+@keyframes eq2 { 0%, 100% { height: 11px; } 50% { height: 4px; } }
+@keyframes eq3 { 0%, 100% { height: 6px; } 50% { height: 12px; } }
+
+.eq-1 { animation: eq1 0.9s ease-in-out infinite; }
+.eq-2 { animation: eq2 0.7s ease-in-out infinite; }
+.eq-3 { animation: eq3 1.1s ease-in-out infinite; }
+
+/* Accessibility Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-spin,
+  .animate-orbit-counter-spin,
+  .animate-glow-breathe,
+  .floating-balloon {
+    animation: none !important;
+    transform: none !important;
+  }
 }
