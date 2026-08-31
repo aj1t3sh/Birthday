@@ -1,13 +1,12 @@
 /**
- * Web Audio API based sound synthesizer for interactive effects and dreamy birthday chimes.
- * Does not rely on external MP3 files that could fail, works on any modern mobile browser.
+ * Web Audio API based sound synthesizer for the birthday tune and interactive effects.
+ * Works seamlessly on any modern mobile browser without requiring external audio files.
  */
 
 let audioCtx = null;
 let isMuted = false;
-let bgMusicInterval = null;
 
-function getAudioContext() {
+export function getAudioContext() {
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (AudioContextClass) {
@@ -20,19 +19,8 @@ function getAudioContext() {
   return audioCtx;
 }
 
-export function setMuted(muted) {
-  isMuted = muted;
-  if (muted && bgMusicInterval) {
-    stopMelody();
-  }
-}
-
-export function getMuted() {
-  return isMuted;
-}
-
 /**
- * Play a sparkling fairy chime note
+ * Play a sparkling chime note
  */
 export function playChime(freq = 587.33, duration = 0.8, type = 'sine') {
   if (isMuted) return;
@@ -66,7 +54,6 @@ export function playChime(freq = 587.33, duration = 0.8, type = 'sine') {
  */
 export function playCelebrationSound() {
   if (isMuted) return;
-  // C major 9 arpeggio with sparkling glockenspiel feel
   const notes = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51];
   notes.forEach((freq, idx) => {
     setTimeout(() => {
@@ -84,7 +71,6 @@ export function playCandleBlowSound() {
     const ctx = getAudioContext();
     if (!ctx) return;
 
-    // Pink noise buffer for gentle breath/whoosh
     const bufferSize = ctx.sampleRate * 0.4;
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
@@ -109,7 +95,6 @@ export function playCandleBlowSound() {
 
     noise.start();
 
-    // Followed by celebration sparkles
     setTimeout(() => {
       playCelebrationSound();
     }, 200);
@@ -119,7 +104,6 @@ export function playCandleBlowSound() {
 }
 
 // Gentle birthday music-box melody: Happy Birthday notes in high octave
-// [Note freq in Hz, duration in ms]
 const melodyNotes = [
   [523.25, 300], // C5
   [523.25, 300], // C5
@@ -155,8 +139,13 @@ let melodyTimeout = null;
 let currentMelodyStep = 0;
 let isPlayingMelody = false;
 
+/**
+ * Starts the existing birthday melody in an automatic continuous loop.
+ * Once started by the first user interaction, it continues throughout all pages.
+ */
 export function startMusicBoxMelody() {
   if (isPlayingMelody || isMuted) return;
+  getAudioContext();
   isPlayingMelody = true;
   currentMelodyStep = 0;
 
@@ -179,16 +168,5 @@ export function stopMelody() {
   if (melodyTimeout) {
     clearTimeout(melodyTimeout);
     melodyTimeout = null;
-  }
-}
-
-export function toggleMelody() {
-  if (isPlayingMelody) {
-    stopMelody();
-    return false;
-  } else {
-    getAudioContext();
-    startMusicBoxMelody();
-    return true;
   }
 }

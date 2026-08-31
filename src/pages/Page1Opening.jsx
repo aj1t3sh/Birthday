@@ -2,12 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { storyContent } from '../config/storyContent';
-import { playChime } from '../utils/audioHelper';
+import { startMusicBoxMelody, playChime } from '../utils/audioHelper';
 
 export default function Page1Opening({ onNext }) {
   const { page1_opening } = storyContent;
 
   const handleBegin = () => {
+    // Start the existing birthday tune on the first user interaction
+    startMusicBoxMelody();
     playChime(587.33, 0.8, 'sine');
     onNext();
   };

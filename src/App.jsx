@@ -10,12 +10,11 @@ import Page4CakeCelebration from './pages/Page4CakeCelebration';
 import Page5GiftSurprise from './pages/Page5GiftSurprise';
 import Page6GrandFinale from './pages/Page6GrandFinale';
 
-import { toggleMelody, playChime } from './utils/audioHelper';
+import { playChime } from './utils/audioHelper';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const totalPages = 6;
 
   // Keyboard navigation for desktop testing
@@ -55,11 +54,6 @@ export default function App() {
     setCurrentPage(1);
   };
 
-  const handleToggleMusic = () => {
-    const active = toggleMelody();
-    setIsMusicPlaying(active);
-  };
-
   // Full-screen page slide animation variants
   const pageVariants = {
     enter: (direction) => ({
@@ -95,13 +89,11 @@ export default function App() {
         backgroundColor: 'var(--midnight-sky)',
       }}
     >
-      {/* Top Minimal Progress Header */}
+      {/* Top Minimal Progress Header (Clean, zero audio controls) */}
       <StoryHeader
         currentPage={currentPage}
         totalPages={totalPages}
         isDark={true}
-        isMusicPlaying={isMusicPlaying}
-        onToggleMusic={handleToggleMusic}
       />
 
       {/* Main Full-Screen Viewport with Touch Drag / Swipe Handling */}
