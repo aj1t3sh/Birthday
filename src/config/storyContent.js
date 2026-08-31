@@ -100,7 +100,7 @@ export const storyContent = {
   },
 
   // -----------------------------------------------------------------
-  // PAGE 3 — DYNAMIC INTERACTIVE NOTE
+  // PAGE 3 — DYNAMIC INTERACTIVE NOTE (Heartfelt Hindi Letter)
   // -----------------------------------------------------------------
   page3_note: {
     envelopePrompt: "A little something from me ❤️",
@@ -108,51 +108,43 @@ export const storyContent = {
     beats: [
       {
         id: 1,
-        title: "Dear Bauni,",
-        body: "There is something I don't say often enough.",
-        highlight: null,
+        title: "मेरी प्यारी Bauni ❤️",
+        body: "आज तुम्हारा दिन है...\nऔर शायद ये बातें मैं तुम्हें\nअक्सर नहीं कहता।",
       },
       {
         id: 2,
-        title: "To My Sister",
-        body: "I genuinely want you to know how special you are.",
-        highlight: "special",
+        title: "सच कहूँ तो...",
+        body: "तुम मेरी ज़िंदगी का\nबहुत खास हिस्सा हो।\n\nचाहे हम कितने भी बड़े हो जाएँ,\nकुछ रिश्ते कभी नहीं बदलते।",
       },
       {
         id: 3,
-        title: "As Time Moves",
-        body: "Life keeps moving. People grow.\nAnd somehow, time moves faster than we expect.",
-        highlight: null,
+        title: "वक़्त और ज़िंदगी",
+        body: "वक़्त बहुत जल्दी बदल जाता है।\n\nहम बड़े हो जाते हैं,\nज़िंदगी आगे बढ़ जाती है,\nऔर बहुत कुछ बदल जाता है।\n\nलेकिन...",
       },
       {
         id: 4,
-        title: "Always Close",
-        body: "But some people never really stop feeling like home.",
-        highlight: "home",
+        title: "हमेशा के लिए...",
+        body: "मेरे लिए तुम हमेशा...\n\nमेरी प्यारी Bauni रहोगी। ❤️",
       },
       {
         id: 5,
-        title: "Unchanging",
-        body: "For me...\nyou'll always be Bauni. ❤️",
-        highlight: "Bauni",
+        title: "मेरी दुआ ✨",
+        body: "मेरी बस यही दुआ है कि...\n\nतुम हमेशा खुश रहो। ✨\n\nतुम्हारे सारे सपने\nएक-एक करके पूरे हों।\n\nऔर ज़िंदगी तुम्हें\nवो सब दे जिसकी तुम हक़दार हो।",
       },
       {
         id: 6,
-        title: "My Wish For You",
-        body: "I hope life gives you:\n\n✨ more smiles\n✨ more dreams\n✨ more memories\n✨ more reasons to be proud of yourself.",
-        highlight: null,
+        title: "खुद पर भरोसा",
+        body: "मुश्किलें आएँगी...\n\nलेकिन मुझे पता है\nतुम उन्हें पार कर लोगी।\n\nबस हमेशा खुद पर भरोसा रखना।\n\nऔर कभी भी\nखुद को कम मत समझना। ❤️",
       },
       {
         id: 7,
-        title: "Just Be You",
-        body: "You don't have to be perfect.\nJust keep being you.",
-        highlight: "keep being you",
+        title: "बस खुद जैसी रहना",
+        body: "परफेक्ट बनने की कोशिश मत करना।\n\nबस...\n\nखुद जैसी हो,\nवैसी ही रहना।\n\nखुश रहना।\nमुस्कुराते रहना।\n\nऔर अपने सपनों के पीछे\nभागते रहना। ✨",
       },
       {
         id: 8,
-        title: "Happy Birthday, Komal.",
-        body: "I hope this year gives you everything your heart quietly wishes for.\n\nWith lots of love,\nYour Brother ❤️",
-        highlight: null,
+        title: "Happy Birthday, Komal 🎂",
+        body: "जन्मदिन की बहुत-बहुत शुभकामनाएँ,\nKomal। 🎂❤️\n\nमेरी प्यारी Bauni...\n\nदुआ है कि तुम्हारी ज़िंदगी का\nहर नया साल\n\nऔर ज़्यादा खुशियाँ,\nप्यार,\nसफलता,\nऔर खूबसूरत यादें लेकर आए।\n\nहमेशा खुश रहना। ❤️\n\nढेर सारा प्यार,\nतुम्हारा भाई ❤️",
       },
     ],
     nextButtonText: "Time for Cake 🎂 →",
