@@ -1,0 +1,144 @@
+/* Animations for Birthday Blessings App */
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(-1.5deg);
+  }
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100vh) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(246, 196, 83, 0.4), 0 0 45px rgba(255, 101, 132, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(246, 196, 83, 0.75), 0 0 65px rgba(255, 101, 132, 0.45);
+  }
+}
+
+@keyframes pulseGoldHalo {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+/* Candle Flame Animations */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    border-radius: 50% 50% 35% 35%;
+  }
+  25% {
+    transform: scale(1.08, 0.95) rotate(2deg);
+    border-radius: 45% 55% 30% 40%;
+  }
+  50% {
+    transform: scale(0.95, 1.05) rotate(-2deg);
+    border-radius: 55% 45% 40% 30%;
+  }
+  75% {
+    transform: scale(1.04, 1.02) rotate(1deg);
+    border-radius: 50% 50% 35% 35%;
+  }
+}
+
+@keyframes flameGlow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.8;
+    transform: translateY(0) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(2.2);
+  }
+}
+
+/* Utility Animation Classes */
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-flame {
+  animation: flameFlicker 0.6s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+.animate-flame-glow {
+  animation: flameGlow 1.2s ease-in-out infinite alternate;
+}
